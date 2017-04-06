@@ -97,12 +97,23 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
         print("added annotation")
     }
     
+    // add annotation
     func addPinToMapView(locationCoordinate: CLLocationCoordinate2D) {
         let pin = MKPointAnnotation()
         pin.coordinate = locationCoordinate
-        pin.title = "Founders Den"
+        pin.title = String(describing: locationCoordinate.latitude)
         bgMapView.addAnnotation(pin)
     }
+    
+    // detect annotation
+    func mapView(_ bgMapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation {
+            if let title = annotation.title! {
+                print("Tapped \(title) pin")
+            }
+        }
+    }
+    
 
     // MARK: - Navigation
 
