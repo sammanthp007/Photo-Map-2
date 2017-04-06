@@ -55,8 +55,22 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
     
     @IBAction func onTapCamera(_ sender: UITapGestureRecognizer) {
         // make the camera grow when pressed
-        print("bruh, the button was pressed my man")
         
+        
+        if sender.state == .began {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.cameraImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            })
+            
+            print("bruh, the button was pressed my man")
+        }
+        else if sender.state == .ended {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.cameraImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
+            })
+            
+            print("bruh, the button was released my man")
+        }
         
     }
     
