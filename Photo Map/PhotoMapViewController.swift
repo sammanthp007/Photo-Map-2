@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, LocationsViewControllerDelegate {
     var mapView: MKMapView!
 
     @IBOutlet weak var bgMapView: MKMapView!
@@ -73,7 +73,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
-        print(">>>>>>>>>>came here after picking the image>>>>>>")
+        print("selected the image")
         // Get the image captured by the UIImagePickerController
         let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -88,15 +88,24 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
         performSegue(withIdentifier: "tagSegue", sender: self)
     }
     
+    // after the user selects location
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        print ("selected the location\(latitude, longitude)")
+        
+    }
+    
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let locationsViewController = segue.destination as! LocationsViewController
+        locationsViewController.delegate = self
+        
     }
-    */
+    
+    
 
 }
