@@ -118,6 +118,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"
         
+        // uses one pin display view, we name it myAnnotationView just because its only one and we can name whatever
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
