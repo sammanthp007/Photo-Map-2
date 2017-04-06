@@ -14,8 +14,24 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var bgMapView: MKMapView!
     
+    @IBOutlet weak var cameraImageView: UIImageView!
+    
+    // to click image
+    var pickedImage: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set the tap gesture for the image
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapCamera(_:)))
+        
+        // set user interaction
+        cameraImageView.isUserInteractionEnabled = true
+        
+        // set the tap gesture recognizer
+        cameraImageView.addGestureRecognizer(tapGestureRecognizer)
+            
+            
 
         // Do any additional setup after loading the view.
         bgMapView.delegate = self
@@ -33,6 +49,15 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    
+    @IBAction func onTapCamera(_ sender: UITapGestureRecognizer) {
+        // make the camera grow when pressed
+        print("bruh, the button was pressed my man")
+        
+        
     }
     
 
