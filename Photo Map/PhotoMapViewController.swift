@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class PhotoMapViewController: UIViewController, MKMapViewDelegate {
+class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var mapView: MKMapView!
 
     @IBOutlet weak var bgMapView: MKMapView!
@@ -54,23 +54,37 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate {
     
     
     @IBAction func onTapCamera(_ sender: UITapGestureRecognizer) {
-        // make the camera grow when pressed
+        print("camera button tapped\n")
+        
+        let vc = UIImagePickerController()
+        vc.delegate = self
+        vc.allowsEditing = true
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            vc.sourceType = .camera
+        } else {
+            vc.sourceType = .photoLibrary
+        }
+        
+        self.present(vc, animated: true, completion:nil)
+        
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
+        print(">>>>>>>>>>came here after picking the image>>>>>>")
+        // Get the image captured by the UIImagePickerController
+        let originalImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        
+        pickedImage = editedImage
         
         
-        if sender.state == .began {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.cameraImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-            })
-            
-            print("bruh, the button was pressed my man")
-        }
-        else if sender.state == .ended {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.cameraImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
-            })
-            
-            print("bruh, the button was released my man")
-        }
+        // Do something with the images (based on your use case)
+        
+        // Dismiss UIImagePickerController to go back to your original view controller
+        dismiss(animated: true, completion: nil)
         
     }
     
