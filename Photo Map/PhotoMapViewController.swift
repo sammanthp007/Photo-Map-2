@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import MapKit
 
 class PhotoMapViewController: UIViewController {
+    var mapView: MKMapView!
 
+    @IBOutlet weak var bgMapView: MKMapView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
