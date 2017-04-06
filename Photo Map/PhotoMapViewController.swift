@@ -85,7 +85,7 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
-        
+        performSegue(withIdentifier: "tagSegue", sender: self)
     }
     
 
