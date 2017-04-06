@@ -56,6 +56,8 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
 
         let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
         let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
+        let venue_name = venue.value(forKey: "name")
+        print(">>>>>>>>>>>>>>\(String(describing: venue_name))")
 
         let latString = "\(lat)"
         let lngString = "\(lng)"
@@ -97,7 +99,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
                 if let data = dataOrNil {
                     if let responseDictionary = try! JSONSerialization.jsonObject(
                         with: data, options:[]) as? NSDictionary {
-                            NSLog("response: \(responseDictionary)")
+                            //NSLog("response: \(responseDictionary)")
                             self.results = responseDictionary.value(forKeyPath: "response.venues") as! NSArray
                             self.tableView.reloadData()
 

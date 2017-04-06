@@ -88,12 +88,21 @@ class PhotoMapViewController: UIViewController, MKMapViewDelegate, UINavigationC
         performSegue(withIdentifier: "tagSegue", sender: self)
     }
     
+    
     // after the user selects location
-    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
-        print ("selected the location\(latitude, longitude)")
-        
+    func locationsPickedLocation(controller: LocationsViewController, latitude lat: NSNumber, longitude long: NSNumber) {
+        print ("selected the location\(lat, long)")
+        let locationCoord = CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(long))
+        addPinToMapView(locationCoordinate: locationCoord)
+        print("added annotation")
     }
     
+    func addPinToMapView(locationCoordinate: CLLocationCoordinate2D) {
+        let pin = MKPointAnnotation()
+        pin.coordinate = locationCoordinate
+        pin.title = "Founders Den"
+        bgMapView.addAnnotation(pin)
+    }
 
     // MARK: - Navigation
 
